@@ -1,4 +1,18 @@
+  int tempogiallo; //input
+  int temposemaforo; //input
+  int lampeggiverde; //input
+  int tempolampeggiverde; //input
+  int tempoverde; 
+  int temporosso;
+  int rosso1;
+  int giallo1;
+  int verde1;
+  int rosso2;
+  int giallo2;
+  int verde2;
+  
   void setup() {
+    
   // put your setup code here, to run once:
   int rosso1 = 10;
   int giallo1 = 9;
@@ -6,38 +20,21 @@
   int rosso2 = 11;
   int giallo2 = 12;
   int verde2 = 13;
-  int temporosso;
-  int lampeggiverde; //input
-  int tempolampeggiverde; //input
-  int tempoverde; 
-  int tempogiallo; //input
-  int temposemaforo; //input
-
+ 
   pinMode (rosso1,OUTPUT);
   pinMode (giallo1,OUTPUT);
   pinMode (verde1,OUTPUT);
   pinMode (rosso2,OUTPUT);
   pinMode (giallo2,OUTPUT);
   pinMode (verde2,OUTPUT);
+
+  Serial.begin(9600);
+  
   }
   
 void loop()
 {
   // put your main code here, to run repeatedly:
- 
-  //forse puoi toglierli
-  int rosso1 = 10;
-  int giallo1 = 9;
-  int verde1 = 8;
-  int rosso2 = 11;
-  int giallo2 = 12;
-  int verde2 = 13;
-  int temporosso;//quanto tempo deve stare attivo il rosso
-  int lampeggiverde;//numero di volte che lampeggierà il verde
-  int tempolampeggiverde;//ms che starà acceso e spento il led
-  int tempoverde;
-  int tempogiallo;
-  int temposemaforo;
 
   if (temposemaforo < tempogiallo)
   {"la variabile tempogiallo è troppo grande";}
@@ -115,30 +112,34 @@ void loop()
   delay(0);
 }
 
-void tempolampeggiverde()
+void ILtempolampeggiverde()
 {
-  print("con quale velocità vuoi i lampeggi verdi (ms)?");
-  while(Serial.available == 0) {};
-  tempolampeggiverde =Serial.read().toInt();
+  Serial.print("con quale velocità vuoi i lampeggi verdi (ms)?");
+  while(Serial.available() == 0) {};
+  String inp = Serial.readString(); 
+  tempolampeggiverde = inp.toInt();
 }
 
-void lampeggiverde()
+void ILlampeggiverde()
 {
-  print("quanti lampeggi verdi?");
-  while(Serial.available == 0) {};
-  lampeggiverde =Serial.read().toInt();
+  Serial.print("quanti lampeggi verdi?");
+  while(Serial.available() == 0) {};
+  String inp =Serial.readString();
+  lampeggiverde = inp.toInt();
 }
 
-void tempogiallo()
+void ILtempogiallo()
 {
-  print("per quanto tempo deve stare giallo il semaforo?");
-  while(Serial.available == 0) {};
-  tempogiallo =Serial.read().toInt();
+  Serial.print("per quanto tempo deve stare giallo il semaforo?");
+  while(Serial.available() == 0) {};
+  String inp =Serial.readString();
+  tempogiallo =  inp.toInt();
 }
 
-void temposemaforo()
+void ILtemposemaforo()
 {
-  print("con quale tempo vuoi che abbia finito un ciclo? ");
-  while(Serial.available == 0) {};
-  temposemaforo =Serial.read().toInt();
+  Serial.print("con quale tempo vuoi che abbia finito un ciclo? ");
+  while  (Serial.available() == 0) {};
+  String inp = Serial.readString();
+  temposemaforo = inp.toInt();
 }
