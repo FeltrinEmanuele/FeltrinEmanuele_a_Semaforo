@@ -1,5 +1,3 @@
-
-  
   void setup() {
   // put your setup code here, to run once:
   int rosso1 = 10;
@@ -23,9 +21,6 @@
   pinMode (verde2,OUTPUT);
   }
   
-
-
-
 void loop()
 {
   // put your main code here, to run repeatedly:
@@ -50,23 +45,44 @@ void loop()
   temporosso = temposemaforo - tempogiallo;
   tempoverde = temporosso-lampeggiverde*tempolampeggiverde*2;
   
+ 
   //fase 1 [IL ROSSO STA ACCESO PER X TEMPO]
   digitalWrite (rosso1,HIGH);
-  delay (temporosso); //variabile
+  delay (0);
+  digitalWrite (verde2,HIGH);
+  delay(tempoverde);
+  digitalWrite (verde2, LOW);
+  delay(0);
+  for (int i=0; i<lampeggiverde; i++)
+  {
+  digitalWrite (verde2 , HIGH);
+  delay(tempolampeggiverde); //variabile
+  digitalWrite (verde2, LOW);
+  delay (tempolampeggiverde); //variabile
+  }
+  delay (0);
   digitalWrite (rosso1,LOW);
   delay(0);
+  
 
   //fase 2 [IL ROSSO E GIALLO STANNO ACCESI PER X TEMPO]
   digitalWrite (giallo1 ,HIGH);
+  delay (0);
+  digitalWrite (giallo2 ,HIGH);
   delay (0);
   digitalWrite (rosso1 ,HIGH);
   delay (tempogiallo); //variabile
   digitalWrite (giallo1 ,LOW);
   delay(0);
+  digitalWrite (giallo2 ,LOW);
+  delay (0);
   digitalWrite (rosso1 , LOW);
   delay(0); 
 
+ 
   //fase 3 [IL VERDE SI ACCENDE E RESTA ACCESO CON UN DELAY CHE SI CALCOLA CON: ROSSO(della fase 1) - Lampeggio(della fase 4) * durata lampeggio(della fase 4)]
+  digitalWrite (rosso2, HIGH);
+  delay (0);
   digitalWrite (verde1 , HIGH);
   delay(tempoverde);
   digitalWrite (verde1, LOW);
@@ -79,11 +95,23 @@ void loop()
   digitalWrite (verde1, LOW);
   delay (tempolampeggiverde); //variabile
   }
+  delay (0);
+  digitalWrite (rosso2,LOW);
+  delay (0);
 
+ 
   //fase 5[IL GIALLO RESTA ACCESO PER X SECONDI]
   digitalWrite (giallo1, HIGH);
+  delay (0);
+  digitalWrite (rosso2,HIGH);
+  delay (0);
+  digitalWrite (giallo2,HIGH);
   delay(tempogiallo);//variabile
   digitalWrite (giallo1,LOW);
+  delay(0);
+  digitalWrite (giallo2,LOW);
+  delay(0);
+  digitalWrite (rosso2,LOW);
   delay(0);
 }
 
@@ -110,7 +138,7 @@ void tempogiallo()
 
 void temposemaforo()
 {
-  print("con quale tempo vuoi che abbia finito un ciclo?");
+  print("con quale tempo vuoi che abbia finito un ciclo? ");
   while(Serial.available == 0) {};
   temposemaforo =Serial.read().toInt();
 }
