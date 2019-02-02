@@ -92,15 +92,11 @@ void loop()
  
   //fase 5[IL GIALLO RESTA ACCESO PER X SECONDI]
   digitalWrite (giallo1, HIGH);
-  delay (0);
   digitalWrite (rosso2,HIGH);
-  delay (0);
   digitalWrite (giallo2,HIGH);
   delay(tempogiallo);//variabile
   digitalWrite (giallo1,LOW);
-  delay(0);
   digitalWrite (giallo2,LOW);
-  delay(0);
   digitalWrite (rosso2,LOW);
   delay(0);
 }
