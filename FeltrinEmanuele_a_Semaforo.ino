@@ -35,6 +35,7 @@
   ILtempogiallo();
   ILtemposemaforo();
   
+  
   }
   
 void loop()
@@ -49,7 +50,7 @@ void loop()
   int temporosso = temposemaforo - tempogiallo;
   int tempoverde = temporosso-lampeggiverde*tempolampeggiverde*2; 
   
- Serial.print("INIZIO");
+ 
   //fase 1 [IL ROSSO STA ACCESO PER X TEMPO]
   digitalWrite (rosso1,HIGH);
   digitalWrite (verde2,HIGH);
@@ -132,3 +133,7 @@ void ILtemposemaforo()
   String inp = Serial.readString();
   temposemaforo = inp.toInt();
 }
+ 
+
+
+
